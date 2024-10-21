@@ -130,7 +130,190 @@
     <p>Este diseño normalizado asegura una estructura de datos eficiente, minimizando redundancias y facilitando la gestión de la información en la base de datos.</p>
 
 
-    
+    <h1>Código SQL para crear tablas</h1>
+    <pre><code>
+        CREATE DATABASE FlosrisoftBD;
+        
+        USE FlosrisoftBD;
+        
+        CREATE TABLE Clientes (
+            ClienteID INT PRIMARY KEY IDENTITY,
+            Nombre NVARCHAR(100) NOT NULL,
+            ApellidoPaterno NVARCHAR(100) NOT NULL,
+            ApellidoMaterno NVARCHAR(100) NOT NULL,
+            CorreoElectronico NVARCHAR(100) UNIQUE NOT NULL,
+            Contraseña NVARCHAR(255) NOT NULL,
+            Telefono NVARCHAR(15) NULL,
+            Direccion NVARCHAR(255) NULL,
+            UltimoAcceso DATETIME NULL
+        );
+        
+        CREATE TABLE Pedidos (
+            PedidoID INT PRIMARY KEY IDENTITY,
+            ClienteID INT FOREIGN KEY REFERENCES Clientes(ClienteID),
+            FechaPedido DATETIME NOT NULL DEFAULT GETDATE(),
+            EstadoPedido NVARCHAR(50) NOT NULL,  -- Ejemplo: Pendiente, En Proceso, Entregado, Cancelado
+            Total DECIMAL(10, 2) NOT NULL,
+            FechaEntregaEstimada DATETIME NULL
+        );
+        
+        CREATE TABLE Comentarios (
+            ComentarioID INT PRIMARY KEY IDENTITY,
+            ClienteID INT FOREIGN KEY REFERENCES Clientes(ClienteID),
+            Texto NVARCHAR(255) NOT NULL,  -- Comentario o pregunta del cliente
+            FechaComentario DATETIME NOT NULL DEFAULT GETDATE()
+        );
+        
+        CREATE TABLE Respuestas (
+            RespuestaID INT PRIMARY KEY IDENTITY,
+            ComentarioID INT FOREIGN KEY REFERENCES Comentarios(ComentarioID),
+            TextoRespuesta NVARCHAR(255) NOT NULL,  -- Respuesta del propietario
+            FechaRespuesta DATETIME NOT NULL DEFAULT GETDATE()  -- Fecha en que se respondió
+        );
+        </code></pre>
+
+
+    <h1>Código SQL para agregar registros a las tablas</h1>
+
+    <h3>Registro de Clientes</h3>
+    <pre><code>
+    INSERT INTO Clientes (Nombre, ApellidoPaterno, ApellidoMaterno, CorreoElectronico, Contraseña, Telefono, Direccion, UltimoAcceso) VALUES
+    ('Juan', 'Pérez', 'González', 'juan.perez@example.com', 'contraseña1', '555-0101', 'Calle Falsa 123', GETDATE()),
+    ('María', 'López', 'Hernández', 'maria.lopez@example.com', 'contraseña2', '555-0102', 'Avenida Siempre Viva 742', GETDATE()),
+    ('Carlos', 'Gómez', 'Martínez', 'carlos.gomez@example.com', 'contraseña3', '555-0103', 'Boulevard de los Sueños 456', GETDATE()),
+    ('Ana', 'Torres', 'Ramírez', 'ana.torres@example.com', 'contraseña4', '555-0104', 'Calle del Sol 789', GETDATE()),
+    ('Luis', 'Martín', 'Díaz', 'luis.martin@example.com', 'contraseña5', '555-0105', 'Plaza de la Paz 101', GETDATE()),
+    ('Laura', 'Ríos', 'Salas', 'laura.rios@example.com', 'contraseña6', '555-0106', 'Calle de la Luna 202', GETDATE()),
+    ('Jorge', 'Vásquez', 'Cruz', 'jorge.vasquez@example.com', 'contraseña7', '555-0107', 'Calle de las Flores 303', GETDATE()),
+    ('Sofía', 'Castillo', 'Mendoza', 'sofia.castillo@example.com', 'contraseña8', '555-0108', 'Calle del Río 404', GETDATE()),
+    ('Diego', 'Morales', 'Paredes', 'diego.morales@example.com', 'contraseña9', '555-0109', 'Calle del Árbol 505', GETDATE()),
+    ('Valeria', 'Sánchez', 'Vega', 'valeria.sanchez@example.com', 'contraseña10', '555-0110', 'Avenida Libertad 606', GETDATE()),
+    ('Fernando', 'Jiménez', 'Núñez', 'fernando.jimenez@example.com', 'contraseña11', '555-0111', 'Calle de la Paz 707', GETDATE()),
+    ('Gabriela', 'Salinas', 'Rivas', 'gabriela.salinas@example.com', 'contraseña12', '555-0112', 'Calle de la Esperanza 808', GETDATE()),
+    ('Ricardo', 'Cervantes', 'Palacios', 'ricardo.cervantes@example.com', 'contraseña13', '555-0113', 'Calle del Amor 909', GETDATE()),
+    ('Claudia', 'Mora', 'Soto', 'claudia.mora@example.com', 'contraseña14', '555-0114', 'Calle de los Abetos 1010', GETDATE()),
+    ('Andrés', 'Rojas', 'Cordero', 'andres.rojas@example.com', 'contraseña15', '555-0115', 'Calle de la Libertad 1111', GETDATE()),
+    ('Patricia', 'Fuentes', 'Torres', 'patricia.fuentes@example.com', 'contraseña16', '555-0116', 'Avenida del Sol 1212', GETDATE()),
+    ('Mario', 'Bermúdez', 'Cisneros', 'mario.bermudez@example.com', 'contraseña17', '555-0117', 'Calle de los Olmos 1313', GETDATE()),
+    ('Isabel', 'Navas', 'Aguilar', 'isabel.navas@example.com', 'contraseña18', '555-0118', 'Calle de la Libertad 1414', GETDATE()),
+    ('Roberto', 'Hernández', 'Rojas', 'roberto.hernandez@example.com', 'contraseña19', '555-0119', 'Calle del Cielo 1515', GETDATE()),
+    ('Monica', 'Serrano', 'Salazar', 'monica.serrano@example.com', 'contraseña20', '555-0120', 'Calle de la Vida 1616', GETDATE()),
+    ('Esteban', 'Vargas', 'Arce', 'esteban.vargas@example.com', 'contraseña21', '555-0121', 'Calle de la Montaña 1717', GETDATE()),
+    ('Cecilia', 'Vallejo', 'López', 'cecilia.vallejo@example.com', 'contraseña22', '555-0122', 'Avenida de los Reyes 1818', GETDATE()),
+    ('Oscar', 'García', 'Pérez', 'oscar.garcia@example.com', 'contraseña23', '555-0123', 'Calle del Mar 1919', GETDATE()),
+    ('Rosa', 'Cano', 'Moreno', 'rosa.cano@example.com', 'contraseña24', '555-0124', 'Calle de la Esperanza 2020', GETDATE()),
+    ('Hugo', 'Almeida', 'Ríos', 'hugo.almeida@example.com', 'contraseña25', '555-0125', 'Calle de la Alegría 2121', GETDATE()),
+    ('Silvia', 'Paz', 'Lara', 'silvia.paz@example.com', 'contraseña26', '555-0126', 'Calle del Éxito 2222', GETDATE()),
+    ('Javier', 'Cruz', 'Soto', 'javier.cruz@example.com', 'contraseña27', '555-0127', 'Calle de la Esperanza 2323', GETDATE()),
+    ('Angela', 'Salas', 'Bolaños', 'angela.salas@example.com', 'contraseña28', '555-0128', 'Calle de los Sueños 2424', GETDATE()),
+    ('Victor', 'Sierra', 'Cano', 'victor.sierra@example.com', 'contraseña29', '555-0129', 'Calle de la Amistad 2525', GETDATE()),
+    ('Natalia', 'Rivas', 'Bojorquez', 'natalia.rivas@example.com', 'contraseña30', '555-0130', 'Calle de la Libertad 2626', GETDATE());
+    </code></pre>
+
+    <h3>Registro de Pedidos</h3>
+    <pre><code>
+    INSERT INTO Pedidos (ClienteID, FechaPedido, EstadoPedido, Total, FechaEntregaEstimada) VALUES
+    (1, GETDATE(), 'Pendiente', 99.99, DATEADD(DAY, 3, GETDATE())),
+    (2, GETDATE(), 'Entregado', 49.50, DATEADD(DAY, 2, GETDATE())),
+    (3, GETDATE(), 'En Proceso', 75.25, DATEADD(DAY, 5, GETDATE())),
+    (4, GETDATE(), 'Cancelado', 20.00, DATEADD(DAY, 1, GETDATE())),
+    (5, GETDATE(), 'Entregado', 150.75, DATEADD(DAY, 4, GETDATE())),
+    (6, GETDATE(), 'Pendiente', 200.00, DATEADD(DAY, 3, GETDATE())),
+    (7, GETDATE(), 'Entregado', 89.99, DATEADD(DAY, 2, GETDATE())),
+    (8, GETDATE(), 'En Proceso', 120.00, DATEADD(DAY, 5, GETDATE())),
+    (9, GETDATE(), 'Pendiente', 30.50, DATEADD(DAY, 3, GETDATE())),
+    (10, GETDATE(), 'Entregado', 47.75, DATEADD(DAY, 4, GETDATE())),
+    (11, GETDATE(), 'Pendiente', 65.00, DATEADD(DAY, 3, GETDATE())),
+    (12, GETDATE(), 'En Proceso', 80.25, DATEADD(DAY, 5, GETDATE())),
+    (13, GETDATE(), 'Cancelado', 10.00, DATEADD(DAY, 2, GETDATE())),
+    (14, GETDATE(), 'Entregado', 55.50, DATEADD(DAY, 4, GETDATE())),
+    (15, GETDATE(), 'Pendiente', 90.00, DATEADD(DAY, 3, GETDATE())),
+    (16, GETDATE(), 'Entregado', 120.00, DATEADD(DAY, 2, GETDATE())),
+    (17, GETDATE(), 'En Proceso', 60.00, DATEADD(DAY, 5, GETDATE())),
+    (18, GETDATE(), 'Pendiente', 100.50, DATEADD(DAY, 3, GETDATE())),
+    (19, GETDATE(), 'Cancelado', 25.00, DATEADD(DAY, 1, GETDATE())),
+    (20, GETDATE(), 'Entregado', 70.80, DATEADD(DAY, 4, GETDATE())),
+    (21, GETDATE(), 'Pendiente', 110.00, DATEADD(DAY, 3, GETDATE())),
+    (22, GETDATE(), 'Entregado', 95.00, DATEADD(DAY, 2, GETDATE())),
+    (23, GETDATE(), 'En Proceso', 85.00, DATEADD(DAY, 5, GETDATE())),
+    (24, GETDATE(), 'Pendiente', 45.25, DATEADD(DAY, 3, GETDATE())),
+    (25, GETDATE(), 'Entregado', 150.00, DATEADD(DAY, 4, GETDATE())),
+    (26, GETDATE(), 'Pendiente', 60.00, DATEADD(DAY, 3, GETDATE())),
+    (27, GETDATE(), 'En Proceso', 115.50, DATEADD(DAY, 5, GETDATE())),
+    (28, GETDATE(), 'Cancelado', 35.00, DATEADD(DAY, 2, GETDATE())),
+    (29, GETDATE(), 'Entregado', 75.25, DATEADD(DAY, 4, GETDATE())),
+    (30, GETDATE(), 'Pendiente', 80.00, DATEADD(DAY, 3, GETDATE()));
+    </code></pre>
+
+    <h3>Registro de Comentarios</h3>
+    <pre><code>
+    INSERT INTO Comentarios (ClienteID, Texto, FechaComentario) VALUES
+    (1, '¿Cuál es el estado de mi pedido?', GETDATE()),
+    (2, 'Me gustaría saber más sobre el producto.', GETDATE()),
+    (3, 'No he recibido información de envío.', GETDATE()),
+    (4, 'Quiero cancelar mi pedido.', GETDATE()),
+    (5, 'El producto llegó dañado.', GETDATE()),
+    (6, '¿Pueden darme un seguimiento de mi pedido?', GETDATE()),
+    (7, '¿Hay descuentos disponibles?', GETDATE()),
+    (8, 'Tengo un problema con el pago.', GETDATE()),
+    (9, '¿Cuál es la política de devoluciones?', GETDATE()),
+    (10, 'El servicio al cliente fue excelente.', GETDATE()),
+    (11, 'Me gustaría cambiar mi dirección de envío.', GETDATE()),
+    (12, 'El tiempo de entrega es muy largo.', GETDATE()),
+    (13, '¿Puedo recibir una factura digital?', GETDATE()),
+    (14, '¿Hay disponibilidad del producto en tienda?', GETDATE()),
+    (15, 'El sitio web tiene errores.', GETDATE()),
+    (16, '¿Puedo realizar un pedido por teléfono?', GETDATE()),
+    (17, '¿Qué métodos de pago aceptan?', GETDATE()),
+    (18, 'No estoy satisfecho con el producto.', GETDATE()),
+    (19, 'Me gustaría hacer una queja formal.', GETDATE()),
+    (20, '¿Cómo puedo contactar al soporte técnico?', GETDATE()),
+    (21, 'El producto que recibí no coincide con la descripción.', GETDATE()),
+    (22, '¿Tienen más tamaños disponibles?', GETDATE()),
+    (23, '¿Pueden ayudarme con un reembolso?', GETDATE()),
+    (24, '¿Cuál es el plazo para cambios?', GETDATE()),
+    (25, 'Me gustaría recibir una actualización de mi pedido.', GETDATE()),
+    (26, 'El producto no funciona correctamente.', GETDATE()),
+    (27, '¿Hay algún programa de lealtad?', GETDATE()),
+    (28, '¿Tienen chat en línea para soporte?', GETDATE()),
+    (29, '¿Cuál es el costo de envío?', GETDATE()),
+    (30, 'Quiero saber si tienen una tienda física.', GETDATE());
+    </code></pre>
+
+    <h3>Registro de Respuestas</h3>
+    <pre><code>
+    INSERT INTO Respuestas (ComentarioID, TextoRespuesta, FechaRespuesta) VALUES
+    (1, 'Su pedido está en camino y se entregará pronto.', GETDATE()),
+    (2, 'Puede consultar el sitio para más información sobre el producto.', GETDATE()),
+    (3, 'Estamos investigando la demora en su envío.', GETDATE()),
+    (4, 'Su pedido ha sido cancelado con éxito.', GETDATE()),
+    (5, 'Lamentamos el inconveniente. Por favor, contáctenos para resolverlo.', GETDATE()),
+    (6, 'Su pedido será enviado en las próximas 24 horas.', GETDATE()),
+    (7, 'Sí, actualmente ofrecemos descuentos. Consulte nuestra página de ofertas.', GETDATE()),
+    (8, 'Por favor, intente nuevamente con otro método de pago.', GETDATE()),
+    (9, 'Nuestra política de devoluciones está disponible en el sitio web.', GETDATE()),
+    (10, 'Agradecemos su comentario. Estamos aquí para ayudar.', GETDATE()),
+    (11, 'Por favor, envíenos los detalles de su nueva dirección.', GETDATE()),
+    (12, 'Lamentamos la espera. Estamos trabajando para mejorar nuestros tiempos de entrega.', GETDATE()),
+    (13, 'Sí, puede solicitar su factura digital a través de nuestro correo de soporte.', GETDATE()),
+    (14, 'Por favor, visite nuestra tienda en la dirección indicada en el sitio web.', GETDATE()),
+    (15, 'Estamos trabajando para corregir los errores en el sitio.', GETDATE()),
+    (16, 'Sí, puede realizar pedidos por teléfono. Llame al número proporcionado.', GETDATE()),
+    (17, 'Aceptamos varios métodos de pago, incluidos tarjetas de crédito y PayPal.', GETDATE()),
+    (18, 'Lamentamos que no esté satisfecho. Por favor, contáctenos para asistencia.', GETDATE()),
+    (19, 'Por favor, envíenos los detalles de su queja a nuestro correo de soporte.', GETDATE()),
+    (20, 'Puede contactar al soporte técnico a través del chat en línea.', GETDATE()),
+    (21, 'Lamentamos la confusión. Por favor, contáctenos para resolverlo.', GETDATE()),
+    (22, 'Podemos verificar la disponibilidad de otros tamaños. Por favor, especifique.', GETDATE()),
+    (23, 'Estamos procesando su solicitud de reembolso. Recibirá una actualización pronto.', GETDATE()),
+    (24, 'El plazo para cambios es de 30 días desde la recepción del producto.', GETDATE()),
+    (25, 'Su pedido será actualizado con la nueva información.', GETDATE()),
+    (26, 'Por favor, devuélvanos el producto para poder ayudarle.', GETDATE()),
+    (27, 'Sí, ofrecemos un programa de lealtad. Consulte nuestra página para más detalles.', GETDATE()),
+    (28, 'Sí, tenemos chat en línea disponible en horario laboral.', GETDATE()),
+    (29, 'El costo de envío varía según la ubicación. Puede calcularlo en el carrito.', GETDATE()),
+    (30, 'No tenemos tienda física, pero puede realizar pedidos en línea.', GETDATE());
+    </code></pre>
 
 
 
