@@ -6,12 +6,138 @@
     <title>Document</title>
 </head>
 <body>
+
+    <a href="/Subsistemas/clientes.html">[Clientes]</a>
+
     <h1>Diseño de la base de datos del subsistema</h1>
 
     <p></p>
 
-    <h2>Diagrame de la base de datos</h2>
+    <h1>Diagrama de la base de datos</h1>
     <img src="" alt="">
+
+    <h1>Descripción de la Arquitectura de la Base de Datos</h1>
+    <p>La base de datos está diseñada para gestionar de manera eficiente la información de los clientes, pedidos, comentarios y respuestas dentro del sistema. Su estructura relacional permite un fácil acceso y manipulación de los datos, asegurando que tanto los clientes como el propietario del sistema puedan interactuar de manera efectiva.</p>
+
+    <h2>Tabla Clientes</h2>
+
+    <h3>Propósito</h3>
+    <p>La tabla Clientes es fundamental para almacenar la información de los usuarios que interactúan con el sistema. Permite gestionar la identidad y los datos de contacto de cada cliente.</p>
+
+    <h3>Campos</h3>
+    <ul>
+        <li><strong>ClienteID:</strong> Clave primaria única que identifica a cada cliente.</li>
+        <li><strong>Nombre, ApellidoPaterno y ApellidoMaterno:</strong> Permiten un tratamiento completo y formal del cliente.</li>
+        <li><strong>CorreoElectronico:</strong> Único y obligatorio, permite la autenticación y comunicación efectiva.</li>
+        <li><strong>Contraseña:</strong> Almacena de forma segura la contraseña del cliente, necesaria para el acceso a su cuenta.</li>
+        <li><strong>Telefono y Direccion:</strong> Campos opcionales que facilitan el contacto y la entrega.</li>
+        <li><strong>UltimoAcceso:</strong> Permite realizar análisis sobre la actividad del cliente.</li>
+    </ul>
+
+    <h2>Tabla Pedidos</h2>
+
+    <h3>Propósito</h3>
+    <p>La tabla Pedidos registra las transacciones realizadas por los clientes, permitiendo un seguimiento detallado de cada pedido.</p>
+
+    <h3>Campos</h3>
+    <ul>
+        <li><strong>PedidoID:</strong> Clave primaria que identifica cada pedido.</li>
+        <li><strong>ClienteID:</strong> Clave foránea que relaciona cada pedido con un cliente específico.</li>
+        <li><strong>FechaPedido:</strong> Registra automáticamente la fecha del pedido.</li>
+        <li><strong>EstadoPedido:</strong> Indica el estado del pedido, ayudando a gestionar el flujo de trabajo.</li>
+        <li><strong>Total:</strong> Almacena el monto total del pedido, esencial para la gestión financiera.</li>
+        <li><strong>FechaEntregaEstimada:</strong> Proporciona información al cliente sobre su pedido.</li>
+    </ul>
+
+    <h2>Tabla Comentarios</h2>
+
+    <h3>Propósito</h3>
+    <p>La tabla Comentarios permite a los clientes dejar sus preguntas, inquietudes o comentarios sobre productos o servicios.</p>
+
+    <h3>Campos</h3>
+    <ul>
+        <li><strong>ComentarioID:</strong> Clave primaria que identifica cada comentario.</li>
+        <li><strong>ClienteID:</strong> Clave foránea que vincula el comentario al cliente que lo realizó.</li>
+        <li><strong>Texto:</strong> Contiene el contenido del comentario.</li>
+        <li><strong>FechaComentario:</strong> Registra cuándo se hizo el comentario.</li>
+    </ul>
+
+    <h2>Tabla Respuestas</h2>
+
+    <h3>Propósito</h3>
+    <p>La tabla Respuestas se utiliza para registrar las respuestas que el propietario da a los comentarios de los clientes.</p>
+
+    <h3>Campos</h3>
+    <ul>
+        <li><strong>RespuestaID:</strong> Clave primaria que identifica cada respuesta.</li>
+        <li><strong>ComentarioID:</strong> Clave foránea que relaciona la respuesta con el comentario correspondiente.</li>
+        <li><strong>TextoRespuesta:</strong> Contiene el texto de la respuesta.</li>
+        <li><strong>FechaRespuesta:</strong> Registra cuándo se proporcionó la respuesta.</li>
+    </ul>
+
+    <h2>Relaciones entre Tablas</h2>
+    <ol>
+        <li><strong>Clientes a Pedidos:</strong> Relación Uno a Muchos: Un cliente puede realizar múltiples pedidos, lo que permite gestionar eficientemente el historial de compras.</li>
+        <li><strong>Clientes a Comentarios:</strong> Relación Uno a Muchos: Un cliente puede dejar múltiples comentarios, acumulando retroalimentación en un solo lugar.</li>
+        <li><strong>Comentarios a Respuestas:</strong> Relación Uno a Muchos: Un comentario puede tener múltiples respuestas, permitiendo un registro estructurado de la comunicación.</li>
+    </ol>
+    
+    <br>
+
+    <p>El diseño servira para implementar las funcionalidades de los usuarios del subsistema:</p>
+
+    <p><b>Requerimientos del Cliente:</b> La tabla Clientes, con su estructura de campos, permite a los usuarios registrarse y acceder a sus cuentas de manera segura. Los campos opcionales y obligatorios facilitan la gestión de la información personal del cliente. La relación entre Clientes y Pedidos permite a los clientes ver un historial completo de sus transacciones y estados de pedidos. La tabla Comentarios permite a los clientes interactuar y dejar feedback, mientras que la tabla Respuestas permite al propietario atender esas inquietudes.</p>
+
+    <p><b>Requerimientos del Propietario:</b> La estructura de la tabla Clientes permite al propietario acceder fácilmente a la información básica de todos los clientes. La relación con las tablas de pedidos y comentarios permite al propietario gestionar de manera efectiva las cuentas y la comunicación. La tabla Respuestas proporciona un mecanismo claro para responder a preguntas y comentarios de los clientes, mejorando la atención al cliente.</p>
+
+
+    <h1>Normalización de la Base de Datos</h1>
+    <p>La base de datos ha sido diseñada siguiendo las primeras tres formas normales (1NF, 2NF, 3NF) para garantizar la organización y consistencia de los datos:</p>
+
+    <h2>1NF (Primera Forma Normal)</h2>
+
+    <p>Cada tabla tiene una clave primaria única y todas las entradas son atómicas, lo que significa que cada campo contiene un solo valor. Por ejemplo:</p>
+
+    <ul>
+        <li><strong>Tabla Clientes:</strong> Contiene campos como Nombre, ApellidoPaterno y ApellidoMaterno, donde cada uno de estos campos guarda un solo valor, y ClienteID actúa como clave primaria, identificando de manera única a cada cliente.</li>
+        <li><strong>Tabla Pedidos:</strong> Cada pedido es único gracias al campo PedidoID, y todos los campos como FechaPedido y EstadoPedido contienen valores individuales sin listas ni conjuntos.</li>
+        <li><strong>Tabla Comentarios:</strong> Cada comentario tiene un ComentarioID único, y los campos como Texto y FechaComentario son atómicos.</li>
+        <li><strong>Tabla Respuestas:</strong> Con RespuestaID como clave primaria, cada respuesta se almacena de forma independiente y todos los campos son atómicos.</li>
+    </ul>
+
+    <h2>2NF (Segunda Forma Normal)</h2>
+
+    <p>Se ha eliminado la dependencia parcial de los atributos, asegurando que todos los atributos dependen completamente de la clave primaria. Esto se refleja en:</p>
+
+    <ul>
+        <li><strong>Tabla Clientes:</strong> Todos los atributos como Nombre, ApellidoPaterno y CorreoElectronico dependen completamente de ClienteID.</li>
+        <li><strong>Tabla Pedidos:</strong> Atributos como ClienteID, FechaPedido y EstadoPedido dependen totalmente de PedidoID, lo que elimina dependencias parciales.</li>
+        <li><strong>Tabla Comentarios:</strong> Los atributos ClienteID, Texto y FechaComentario dependen completamente de ComentarioID, sin dependencias parciales.</li>
+        <li><strong>Tabla Respuestas:</strong> Todos los campos como ComentarioID, TextoRespuesta y FechaRespuesta dependen completamente de RespuestaID.</li>
+    </ul>
+
+    <h2>3NF (Tercera Forma Normal)</h2>
+
+    <p>No hay dependencias transitivas; todos los atributos son dependientes directamente de la clave primaria. Esto asegura que:</p>
+
+    <ul>
+        <li><strong>Tabla Clientes:</strong> Atributos como CorreoElectronico y Telefono no dependen de otros atributos no clave, sino que dependen únicamente de ClienteID.</li>
+        <li><strong>Tabla Pedidos:</strong> Atributos como EstadoPedido y Total dependen directamente de PedidoID, sin depender de otros atributos.</li>
+        <li><strong>Tabla Comentarios:</strong> Texto y FechaComentario dependen únicamente de ComentarioID, evitando dependencias transitivas.</li>
+        <li><strong>Tabla Respuestas:</strong> Atributos como TextoRespuesta y FechaRespuesta son dependientes solo de RespuestaID, lo que asegura la integridad de los datos.</li>
+    </ul>
+
+    <p>Este diseño normalizado asegura una estructura de datos eficiente, minimizando redundancias y facilitando la gestión de la información en la base de datos.</p>
+
+
+    
+
+
+
+
+
 
 </body>
 </html>
+
+
