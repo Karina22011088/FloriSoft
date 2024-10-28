@@ -11,165 +11,161 @@
 
     <h1>Diseño de la base de datos del subsistema</h1>
 
-    <p></p>
+    <br>
 
     <h1>Diagrama de la base de datos</h1>
     <img src="./../imagenes/diagramaBD.png" alt="Diagrama de la base de datos" width="800">
 
-    <h1>Descripción de la Arquitectura de la Base de Datos</h1>
-    <p>La base de datos está diseñada para gestionar de manera eficiente la información de los clientes, pedidos, comentarios y respuestas dentro del sistema. Su estructura relacional permite un fácil acceso y manipulación de los datos, asegurando que tanto los clientes como el propietario del sistema puedan interactuar de manera efectiva.</p>
+    <h1>Descripción de Pertinencia de la Arquitectura de la Base de Datos</h1>
 
     <h2>Tabla Clientes</h2>
-
     <h3>Propósito</h3>
-    <p>La tabla Clientes es fundamental para almacenar la información de los usuarios que interactúan con el sistema. Permite gestionar la identidad y los datos de contacto de cada cliente.</p>
-
+    <p>La tabla Clientes es fundamental para almacenar la información de los usuarios que interactúan con el sistema. Permite gestionar la identidad y los datos de contacto de cada cliente, asegurando una comunicación efectiva y un acceso seguro a sus cuentas.</p>
     <h3>Campos</h3>
     <ul>
-        <li><strong>ClienteID:</strong> Clave primaria única que identifica a cada cliente.</li>
-        <li><strong>Nombre, ApellidoPaterno y ApellidoMaterno:</strong> Permiten un tratamiento completo y formal del cliente.</li>
-        <li><strong>CorreoElectronico:</strong> Único y obligatorio, permite la autenticación y comunicación efectiva.</li>
-        <li><strong>Contraseña:</strong> Almacena de forma segura la contraseña del cliente, necesaria para el acceso a su cuenta.</li>
-        <li><strong>Telefono y Direccion:</strong> Campos opcionales que facilitan el contacto y la entrega.</li>
-        <li><strong>UltimoAcceso:</strong> Permite realizar análisis sobre la actividad del cliente.</li>
+        <li>ClienteID: Clave primaria única que identifica a cada cliente.</li>
+        <li>PrimerNombre, SegundoNombre, ApellidoPaterno y ApellidoMaterno: Permiten un tratamiento completo y formal del cliente.</li>
+        <li>CorreoElectronico: Único y obligatorio, permite la autenticación y comunicación efectiva.</li>
+        <li>Contraseña: Almacena de forma segura la contraseña del cliente, necesaria para el acceso a su cuenta.</li>
+        <li>Telefono: Campo obligatorio que facilita el contacto directo con el cliente.</li>
+        <li>Calle, NumeroExterior, NumeroInterior, Colonia, Municipio, CodigoPostal: Campos que permiten registrar la dirección de entrega, esencial para el procesamiento de pedidos.</li>
+        <li>UltimoAcceso: Permite realizar análisis sobre la actividad del cliente, útil para la gestión de cuentas inactivas.</li>
     </ul>
-
-    <h2>Tabla Pedidos</h2>
-
-    <h3>Propósito</h3>
-    <p>La tabla Pedidos registra las transacciones realizadas por los clientes, permitiendo un seguimiento detallado de cada pedido.</p>
-
-    <h3>Campos</h3>
-    <ul>
-        <li><strong>PedidoID:</strong> Clave primaria que identifica cada pedido.</li>
-        <li><strong>ClienteID:</strong> Clave foránea que relaciona cada pedido con un cliente específico.</li>
-        <li><strong>FechaPedido:</strong> Registra automáticamente la fecha del pedido.</li>
-        <li><strong>EstadoPedido:</strong> Indica el estado del pedido, ayudando a gestionar el flujo de trabajo.</li>
-        <li><strong>Total:</strong> Almacena el monto total del pedido, esencial para la gestión financiera.</li>
-        <li><strong>FechaEntregaEstimada:</strong> Proporciona información al cliente sobre su pedido.</li>
-    </ul>
-
-    <h2>Tabla Comentarios</h2>
-
-    <h3>Propósito</h3>
-    <p>La tabla Comentarios permite a los clientes dejar sus preguntas, inquietudes o comentarios sobre productos o servicios.</p>
-
-    <h3>Campos</h3>
-    <ul>
-        <li><strong>ComentarioID:</strong> Clave primaria que identifica cada comentario.</li>
-        <li><strong>ClienteID:</strong> Clave foránea que vincula el comentario al cliente que lo realizó.</li>
-        <li><strong>Texto:</strong> Contiene el contenido del comentario.</li>
-        <li><strong>FechaComentario:</strong> Registra cuándo se hizo el comentario.</li>
-    </ul>
-
-    <h2>Tabla Respuestas</h2>
-
-    <h3>Propósito</h3>
-    <p>La tabla Respuestas se utiliza para registrar las respuestas que el propietario da a los comentarios de los clientes.</p>
-
-    <h3>Campos</h3>
-    <ul>
-        <li><strong>RespuestaID:</strong> Clave primaria que identifica cada respuesta.</li>
-        <li><strong>ComentarioID:</strong> Clave foránea que relaciona la respuesta con el comentario correspondiente.</li>
-        <li><strong>TextoRespuesta:</strong> Contiene el texto de la respuesta.</li>
-        <li><strong>FechaRespuesta:</strong> Registra cuándo se proporcionó la respuesta.</li>
-    </ul>
-
-    <h2>Relaciones entre Tablas</h2>
-    <ol>
-        <li><strong>Clientes a Pedidos:</strong> Relación Uno a Muchos: Un cliente puede realizar múltiples pedidos, lo que permite gestionar eficientemente el historial de compras.</li>
-        <li><strong>Clientes a Comentarios:</strong> Relación Uno a Muchos: Un cliente puede dejar múltiples comentarios, acumulando retroalimentación en un solo lugar.</li>
-        <li><strong>Comentarios a Respuestas:</strong> Relación Uno a Muchos: Un comentario puede tener múltiples respuestas, permitiendo un registro estructurado de la comunicación.</li>
-    </ol>
     
-    <br>
-
-    <p>El diseño servira para implementar las funcionalidades de los usuarios del subsistema:</p>
-
-    <p><b>Requerimientos del Cliente:</b> La tabla Clientes, con su estructura de campos, permite a los usuarios registrarse y acceder a sus cuentas de manera segura. Los campos opcionales y obligatorios facilitan la gestión de la información personal del cliente. La relación entre Clientes y Pedidos permite a los clientes ver un historial completo de sus transacciones y estados de pedidos. La tabla Comentarios permite a los clientes interactuar y dejar feedback, mientras que la tabla Respuestas permite al propietario atender esas inquietudes.</p>
-
-    <p><b>Requerimientos del Propietario:</b> La estructura de la tabla Clientes permite al propietario acceder fácilmente a la información básica de todos los clientes. La relación con las tablas de pedidos y comentarios permite al propietario gestionar de manera efectiva las cuentas y la comunicación. La tabla Respuestas proporciona un mecanismo claro para responder a preguntas y comentarios de los clientes, mejorando la atención al cliente.</p>
-
-
-    <h1>Normalización de la Base de Datos</h1>
+    <h2>Tabla Pedidos</h2>
+    <h3>Propósito</h3>
+    <p>La tabla Pedidos registra todos los pedidos realizados por los clientes, permitiendo gestionar el historial de compras y el estado actual de cada transacción.</p>
+    <h3>Campos</h3>
+    <ul>
+        <li>PedidoID: Clave primaria única que identifica cada pedido.</li>
+        <li>ClienteID: Clave foránea que relaciona el pedido con el cliente que lo realizó.</li>
+        <li>FechaPedido: Registra la fecha en que se realizó el pedido, esencial para el seguimiento.</li>
+        <li>EstadoPedido: Indica el estado actual del pedido (Pendiente, En Proceso, Entregado, Cancelado), facilitando la gestión operativa.</li>
+        <li>Total: Monto total del pedido, necesario para la contabilidad y el análisis de ventas.</li>
+        <li>FechaEntregaEstimada: Proporciona una fecha estimada para la entrega, ayudando a gestionar las expectativas del cliente.</li>
+    </ul>
+    
+    <h2>Tabla Comentarios</h2>
+    <h3>Propósito</h3>
+    <p>La tabla Comentarios permite a los clientes dejar comentarios, preguntas o reseñas sobre los productos, fomentando la interacción y retroalimentación.</p>
+    <h3>Campos</h3>
+    <ul>
+        <li>ComentarioID: Clave primaria única que identifica cada comentario.</li>
+        <li>ClienteID: Clave foránea que vincula el comentario al cliente que lo realizó.</li>
+        <li>Comentario: Contenido del comentario, que puede ser una pregunta, opinión o reseña.</li>
+        <li>FechaComentario: Registra la fecha en que se realizó el comentario, útil para el seguimiento de interacciones.</li>
+    </ul>
+    
+    <h2>Tabla Respuestas</h2>
+    <h3>Propósito</h3>
+    <p>La tabla Respuestas almacena las respuestas proporcionadas por los propietarios o administradores a los comentarios de los clientes, facilitando la atención al cliente.</p>
+    <h3>Campos</h3>
+    <ul>
+        <li>RespuestaID: Clave primaria única que identifica cada respuesta.</li>
+        <li>Respuesta: Contenido de la respuesta, que aborda la consulta o comentario del cliente.</li>
+        <li>FechaRespuesta: Registra la fecha en que se realizó la respuesta, ayudando a mantener un historial de interacciones.</li>
+    </ul>
+    
+    <h2>Tabla ComentarioRespuesta</h2>
+    <h3>Propósito</h3>
+    <p>La tabla ComentarioRespuesta actúa como una tabla de unión para gestionar las relaciones entre comentarios y respuestas, permitiendo múltiples respuestas a un solo comentario.</p>
+    <h3>Campos</h3>
+    <ul>
+        <li>ComentarioID: Clave foránea que vincula la relación al comentario correspondiente.</li>
+        <li>RespuestaID: Clave foránea que vincula la relación a la respuesta correspondiente.</li>
+        <li>Clave primaria (ComentarioID, RespuestaID): Asegura que cada combinación de comentario y respuesta sea única, evitando duplicados en las relaciones.</li>
+    </ul>
+    
+    <p>La arquitectura de la base de datos, a través de sus tablas y campos, está diseñada para satisfacer las necesidades del sistema mientras asegura la integridad y la eficiencia de datos. Cada tabla cumple un propósito específico y sus campos están alineados con los requerimientos funcionales de los clientes y propietarios.</p>
+    
+    <h2>Normalización de la Base de Datos</h2>
     <p>La base de datos ha sido diseñada siguiendo las primeras tres formas normales (1NF, 2NF, 3NF) para garantizar la organización y consistencia de los datos:</p>
-
-    <h2>1NF (Primera Forma Normal)</h2>
-
+    
+    <h3>1NF (Primera Forma Normal)</h3>
     <p>Cada tabla tiene una clave primaria única y todas las entradas son atómicas, lo que significa que cada campo contiene un solo valor. Por ejemplo:</p>
-
     <ul>
-        <li><strong>Tabla Clientes:</strong> Contiene campos como Nombre, ApellidoPaterno y ApellidoMaterno, donde cada uno de estos campos guarda un solo valor, y ClienteID actúa como clave primaria, identificando de manera única a cada cliente.</li>
-        <li><strong>Tabla Pedidos:</strong> Cada pedido es único gracias al campo PedidoID, y todos los campos como FechaPedido y EstadoPedido contienen valores individuales sin listas ni conjuntos.</li>
-        <li><strong>Tabla Comentarios:</strong> Cada comentario tiene un ComentarioID único, y los campos como Texto y FechaComentario son atómicos.</li>
-        <li><strong>Tabla Respuestas:</strong> Con RespuestaID como clave primaria, cada respuesta se almacena de forma independiente y todos los campos son atómicos.</li>
+        <li>Tabla Clientes: Contiene campos como PrimerNombre, SegundoNombre, ApellidoPaterno y ApellidoMaterno, donde cada uno de estos campos guarda un solo valor. ClienteID actúa como clave primaria, identificando de manera única a cada cliente.</li>
+        <li>Tabla Pedidos: Cada pedido es único gracias al campo PedidoID, y todos los campos como FechaPedido y EstadoPedido contienen valores individuales sin listas ni conjuntos.</li>
+        <li>Tabla Comentarios: Cada comentario tiene un ComentarioID único, y los campos como Texto y FechaComentario son atómicos.</li>
+        <li>Tabla Respuestas: Con RespuestaID como clave primaria, cada respuesta se almacena de forma independiente y todos los campos son atómicos.</li>
+        <li>Tabla ComentarioRespuesta: Esta tabla de unión contiene únicamente las claves foráneas ComentarioID y RespuestaID, asegurando que cada relación sea única y sin duplicados.</li>
     </ul>
-
-    <h2>2NF (Segunda Forma Normal)</h2>
-
-    <p>Se ha eliminado la dependencia parcial de los atributos, asegurando que todos los atributos dependen completamente de la clave primaria. Esto se refleja en:</p>
-
+    
+    <h3>2NF (Segunda Forma Normal)</h3>
+    <p>La base de datos está en 1NF y todos los atributos no clave dependen completamente de la clave primaria. Por ejemplo:</p>
     <ul>
-        <li><strong>Tabla Clientes:</strong> Todos los atributos como Nombre, ApellidoPaterno y CorreoElectronico dependen completamente de ClienteID.</li>
-        <li><strong>Tabla Pedidos:</strong> Atributos como ClienteID, FechaPedido y EstadoPedido dependen totalmente de PedidoID, lo que elimina dependencias parciales.</li>
-        <li><strong>Tabla Comentarios:</strong> Los atributos ClienteID, Texto y FechaComentario dependen completamente de ComentarioID, sin dependencias parciales.</li>
-        <li><strong>Tabla Respuestas:</strong> Todos los campos como ComentarioID, TextoRespuesta y FechaRespuesta dependen completamente de RespuestaID.</li>
+        <li>Tabla Clientes: Todos los campos, como PrimerNombre, ApellidoPaterno y CorreoElectronico, dependen completamente de ClienteID.</li>
+        <li>Tabla Pedidos: Cada atributo, incluyendo ClienteID, FechaPedido, EstadoPedido y Total, depende completamente de PedidoID.</li>
+        <li>Tabla Comentarios: Todos los campos dependen únicamente de ComentarioID, garantizando que no haya dependencia parcial.</li>
+        <li>Tabla Respuestas: Todos los campos son dependientes de RespuestaID, sin dependencias parciales.</li>
+        <li>Tabla ComentarioRespuesta: La combinación de ComentarioID y RespuestaID como clave primaria asegura que todos los campos dependan completamente de esta clave compuesta.</li>
     </ul>
-
-    <h2>3NF (Tercera Forma Normal)</h2>
-
-    <p>No hay dependencias transitivas; todos los atributos son dependientes directamente de la clave primaria. Esto asegura que:</p>
-
+    
+    <h3>3NF (Tercera Forma Normal)</h3>
+    <p>La base de datos está en 2NF y no hay dependencias transitivas entre los atributos no clave. Por ejemplo:</p>
     <ul>
-        <li><strong>Tabla Clientes:</strong> Atributos como CorreoElectronico y Telefono no dependen de otros atributos no clave, sino que dependen únicamente de ClienteID.</li>
-        <li><strong>Tabla Pedidos:</strong> Atributos como EstadoPedido y Total dependen directamente de PedidoID, sin depender de otros atributos.</li>
-        <li><strong>Tabla Comentarios:</strong> Texto y FechaComentario dependen únicamente de ComentarioID, evitando dependencias transitivas.</li>
-        <li><strong>Tabla Respuestas:</strong> Atributos como TextoRespuesta y FechaRespuesta son dependientes solo de RespuestaID, lo que asegura la integridad de los datos.</li>
+        <li>Tabla Clientes: Todos los atributos no clave dependen únicamente de ClienteID, sin que ningún atributo no clave dependa de otro.</li>
+        <li>Tabla Pedidos: Todos los campos dependen solo de PedidoID, y no existen atributos no clave que dependan de otros atributos no clave.</li>
+        <li>Tabla Comentarios: Los campos dependen únicamente de ComentarioID, sin dependencias transitivas.</li>
+        <li>Tabla Respuestas: Todos los campos dependen únicamente de RespuestaID, garantizando que no haya dependencias transitivas.</li>
+        <li>Tabla ComentarioRespuesta: No hay atributos no clave, ya que solo contiene las claves foráneas, lo que elimina cualquier posibilidad de dependencia transitiva.</li>
     </ul>
-
+    
     <p>Este diseño normalizado asegura una estructura de datos eficiente, minimizando redundancias y facilitando la gestión de la información en la base de datos.</p>
 
 
     <h1>Código SQL para crear tablas</h1>
     <pre><code>
-        CREATE DATABASE FlosrisoftBD;
-        
-        USE FlosrisoftBD;
-        
+        CREATE DATABASE FlosrisoftBD
+        USE FlosrisoftBD
+
         CREATE TABLE Clientes (
             ClienteID INT PRIMARY KEY IDENTITY,
-            Nombre NVARCHAR(100) NOT NULL,
-            ApellidoPaterno NVARCHAR(100) NOT NULL,
-            ApellidoMaterno NVARCHAR(100) NOT NULL,
-            CorreoElectronico NVARCHAR(100) UNIQUE NOT NULL,
-            Contraseña NVARCHAR(255) NOT NULL,
-            Telefono NVARCHAR(15) NULL,
-            Direccion NVARCHAR(255) NULL,
-            UltimoAcceso DATETIME NULL
-        );
-        
+            PrimerNombre NVARCHAR(30) NOT NULL,
+            SegundoNombre NVARCHAR(30) NULL,
+            ApellidoPaterno NVARCHAR(30) NOT NULL,
+            ApellidoMaterno NVARCHAR(30) NOT NULL,
+            CorreoElectronico NVARCHAR(50) UNIQUE NOT NULL,
+            Contraseña NVARCHAR(30) NOT NULL,
+            Telefono NVARCHAR(15) NOT NULL,
+            Calle NVARCHAR(50) NOT NULL,
+            NumeroExterior NVARCHAR(10) NOT NULL,
+            NumeroInterior NVARCHAR(10) NULL,
+            Colonia NVARCHAR(50) NOT NULL,
+            Municipio NVARCHAR(50) NOT NULL,
+            Referencias NVARCHAR(100) NULL,
+            CodigoPostal NVARCHAR(10) NOT NULL,
+            UltimoAcceso DATETIME NOT NULL
+        )
+
         CREATE TABLE Pedidos (
             PedidoID INT PRIMARY KEY IDENTITY,
-            ClienteID INT FOREIGN KEY REFERENCES Clientes(ClienteID),
+            ClienteID INT NOT NULL FOREIGN KEY REFERENCES Clientes(ClienteID), 
             FechaPedido DATETIME NOT NULL DEFAULT GETDATE(),
             EstadoPedido NVARCHAR(50) NOT NULL,  -- Ejemplo: Pendiente, En Proceso, Entregado, Cancelado
             Total DECIMAL(10, 2) NOT NULL,
             FechaEntregaEstimada DATETIME NULL
-        );
-        
+        )
+
         CREATE TABLE Comentarios (
             ComentarioID INT PRIMARY KEY IDENTITY,
-            ClienteID INT FOREIGN KEY REFERENCES Clientes(ClienteID),
-            Texto NVARCHAR(255) NOT NULL,  -- Comentario o pregunta del cliente
+            ClienteID INT NOT NULL FOREIGN KEY REFERENCES Clientes(ClienteID),
+            Comentario NVARCHAR(255) NOT NULL,
             FechaComentario DATETIME NOT NULL DEFAULT GETDATE()
-        );
-        
+        )
+
         CREATE TABLE Respuestas (
             RespuestaID INT PRIMARY KEY IDENTITY,
-            ComentarioID INT FOREIGN KEY REFERENCES Comentarios(ComentarioID),
-            TextoRespuesta NVARCHAR(255) NOT NULL,  -- Respuesta del propietario
-            FechaRespuesta DATETIME NOT NULL DEFAULT GETDATE()  -- Fecha en que se respondió
-        );
+            Respuesta NVARCHAR(255) NOT NULL,
+            FechaRespuesta DATETIME NOT NULL DEFAULT GETDATE()
+        )
+
+        CREATE TABLE ComentarioRespuesta (
+            ComentarioID INT NOT NULL FOREIGN KEY (ComentarioID) REFERENCES Comentarios(ComentarioID),
+            RespuestaID INT NOT NULL FOREIGN KEY (RespuestaID) REFERENCES Respuestas(RespuestaID),
+            PRIMARY KEY (ComentarioID, RespuestaID)  -- Combinación de claves foráneas como clave primaria
+        )
+
         </code></pre>
 
 
@@ -177,144 +173,181 @@
 
     <h3>Registro de Clientes</h3>
     <pre><code>
-    INSERT INTO Clientes (Nombre, ApellidoPaterno, ApellidoMaterno, CorreoElectronico, Contraseña, Telefono, Direccion, UltimoAcceso) VALUES
-    ('Juan', 'Pérez', 'González', 'juan.perez@example.com', 'contraseña1', '555-0101', 'Calle Falsa 123', GETDATE()),
-    ('María', 'López', 'Hernández', 'maria.lopez@example.com', 'contraseña2', '555-0102', 'Avenida Siempre Viva 742', GETDATE()),
-    ('Carlos', 'Gómez', 'Martínez', 'carlos.gomez@example.com', 'contraseña3', '555-0103', 'Boulevard de los Sueños 456', GETDATE()),
-    ('Ana', 'Torres', 'Ramírez', 'ana.torres@example.com', 'contraseña4', '555-0104', 'Calle del Sol 789', GETDATE()),
-    ('Luis', 'Martín', 'Díaz', 'luis.martin@example.com', 'contraseña5', '555-0105', 'Plaza de la Paz 101', GETDATE()),
-    ('Laura', 'Ríos', 'Salas', 'laura.rios@example.com', 'contraseña6', '555-0106', 'Calle de la Luna 202', GETDATE()),
-    ('Jorge', 'Vásquez', 'Cruz', 'jorge.vasquez@example.com', 'contraseña7', '555-0107', 'Calle de las Flores 303', GETDATE()),
-    ('Sofía', 'Castillo', 'Mendoza', 'sofia.castillo@example.com', 'contraseña8', '555-0108', 'Calle del Río 404', GETDATE()),
-    ('Diego', 'Morales', 'Paredes', 'diego.morales@example.com', 'contraseña9', '555-0109', 'Calle del Árbol 505', GETDATE()),
-    ('Valeria', 'Sánchez', 'Vega', 'valeria.sanchez@example.com', 'contraseña10', '555-0110', 'Avenida Libertad 606', GETDATE()),
-    ('Fernando', 'Jiménez', 'Núñez', 'fernando.jimenez@example.com', 'contraseña11', '555-0111', 'Calle de la Paz 707', GETDATE()),
-    ('Gabriela', 'Salinas', 'Rivas', 'gabriela.salinas@example.com', 'contraseña12', '555-0112', 'Calle de la Esperanza 808', GETDATE()),
-    ('Ricardo', 'Cervantes', 'Palacios', 'ricardo.cervantes@example.com', 'contraseña13', '555-0113', 'Calle del Amor 909', GETDATE()),
-    ('Claudia', 'Mora', 'Soto', 'claudia.mora@example.com', 'contraseña14', '555-0114', 'Calle de los Abetos 1010', GETDATE()),
-    ('Andrés', 'Rojas', 'Cordero', 'andres.rojas@example.com', 'contraseña15', '555-0115', 'Calle de la Libertad 1111', GETDATE()),
-    ('Patricia', 'Fuentes', 'Torres', 'patricia.fuentes@example.com', 'contraseña16', '555-0116', 'Avenida del Sol 1212', GETDATE()),
-    ('Mario', 'Bermúdez', 'Cisneros', 'mario.bermudez@example.com', 'contraseña17', '555-0117', 'Calle de los Olmos 1313', GETDATE()),
-    ('Isabel', 'Navas', 'Aguilar', 'isabel.navas@example.com', 'contraseña18', '555-0118', 'Calle de la Libertad 1414', GETDATE()),
-    ('Roberto', 'Hernández', 'Rojas', 'roberto.hernandez@example.com', 'contraseña19', '555-0119', 'Calle del Cielo 1515', GETDATE()),
-    ('Monica', 'Serrano', 'Salazar', 'monica.serrano@example.com', 'contraseña20', '555-0120', 'Calle de la Vida 1616', GETDATE()),
-    ('Esteban', 'Vargas', 'Arce', 'esteban.vargas@example.com', 'contraseña21', '555-0121', 'Calle de la Montaña 1717', GETDATE()),
-    ('Cecilia', 'Vallejo', 'López', 'cecilia.vallejo@example.com', 'contraseña22', '555-0122', 'Avenida de los Reyes 1818', GETDATE()),
-    ('Oscar', 'García', 'Pérez', 'oscar.garcia@example.com', 'contraseña23', '555-0123', 'Calle del Mar 1919', GETDATE()),
-    ('Rosa', 'Cano', 'Moreno', 'rosa.cano@example.com', 'contraseña24', '555-0124', 'Calle de la Esperanza 2020', GETDATE()),
-    ('Hugo', 'Almeida', 'Ríos', 'hugo.almeida@example.com', 'contraseña25', '555-0125', 'Calle de la Alegría 2121', GETDATE()),
-    ('Silvia', 'Paz', 'Lara', 'silvia.paz@example.com', 'contraseña26', '555-0126', 'Calle del Éxito 2222', GETDATE()),
-    ('Javier', 'Cruz', 'Soto', 'javier.cruz@example.com', 'contraseña27', '555-0127', 'Calle de la Esperanza 2323', GETDATE()),
-    ('Angela', 'Salas', 'Bolaños', 'angela.salas@example.com', 'contraseña28', '555-0128', 'Calle de los Sueños 2424', GETDATE()),
-    ('Victor', 'Sierra', 'Cano', 'victor.sierra@example.com', 'contraseña29', '555-0129', 'Calle de la Amistad 2525', GETDATE()),
-    ('Natalia', 'Rivas', 'Bojorquez', 'natalia.rivas@example.com', 'contraseña30', '555-0130', 'Calle de la Libertad 2626', GETDATE());
+    INSERT INTO Clientes (PrimerNombre, SegundoNombre, ApellidoPaterno, ApellidoMaterno, CorreoElectronico, Contraseña, Telefono, Calle, NumeroExterior, NumeroInterior, Colonia, Municipio, Referencias, CodigoPostal, UltimoAcceso) VALUES
+    ('Juan', 'Carlos', 'Pérez', 'García', 'juan.perez@example.com', 'password123', '555-0101', 'Av. Siempre Viva', '123', NULL, 'Centro', 'Ciudad de México', '', '01000', GETDATE()),
+    ('María', 'José', 'López', 'Martínez', 'maria.lopez@example.com', 'password456', '555-0102', 'Calle Falsa', '456', '1A', 'Zona Rosa', 'Ciudad de México', '', '02000', GETDATE()),
+    ('Pedro', NULL, 'González', 'Torres', 'pedro.gonzalez@example.com', 'password789', '555-0103', 'Calle de la Paz', '789', NULL, 'Guadalajara', 'Jalisco', '', '03000', GETDATE()),
+    ('Ana', 'Lucía', 'Ramírez', 'Sánchez', 'ana.ramirez@example.com', 'password321', '555-0104', 'Paseo de la Reforma', '101', NULL, 'Polanco', 'Ciudad de México', '', '04000', GETDATE()),
+    ('Luis', 'Fernando', 'Morales', 'Hernández', 'luis.morales@example.com', 'password654', '555-0105', 'Calle 5', '202', '2B', 'Tlalpan', 'Ciudad de México', '', '05000', GETDATE()),
+    ('Sofía', NULL, 'Vargas', 'Suárez', 'sofia.vargas@example.com', 'password852', '555-0106', 'Calle 10', '303', NULL, 'Mérida', 'Yucatán', '', '06000', GETDATE()),
+    ('Diego', 'Andrés', 'Castillo', 'Jiménez', 'diego.castillo@example.com', 'password963', '555-0107', 'Calle 15', '404', '3C', 'Monterrey', 'Nuevo León', '', '07000', GETDATE()),
+    ('Fernanda', 'Mariana', 'Díaz', 'Cruz', 'fernanda.diaz@example.com', 'password147', '555-0108', 'Calle 20', '505', NULL, 'Veracruz', 'Veracruz', '', '08000', GETDATE()),
+    ('Javier', NULL, 'Mendoza', 'Ríos', 'javier.mendoza@example.com', 'password258', '555-0109', 'Calle 25', '606', '4D', 'Puebla', 'Puebla', '', '09000', GETDATE()),
+    ('Lucía', 'Isabel', 'Salazar', 'Pérez', 'lucia.salazar@example.com', 'password369', '555-0110', 'Calle 30', '707', NULL, 'Cancún', 'Quintana Roo', '', '10000', GETDATE()),
+    ('Carlos', 'Eduardo', 'Cordero', 'Alvarez', 'carlos.cordero@example.com', 'password159', '555-0111', 'Calle 35', '808', '5E', 'Toluca', 'Estado de México', '', '11000', GETDATE()),
+    ('Valeria', NULL, 'Orozco', 'Nava', 'valeria.orozco@example.com', 'password753', '555-0112', 'Calle 40', '909', NULL, 'Tijuana', 'Baja California', '', '12000', GETDATE()),
+    ('Ricardo', 'Antonio', 'Silva', 'Márquez', 'ricardo.silva@example.com', 'password246', '555-0113', 'Calle 45', '1010', '6F', 'La Paz', 'Baja California Sur', '', '13000', GETDATE()),
+    ('Claudia', 'Patricia', 'García', 'Rojas', 'claudia.garcia@example.com', 'password159', '555-0114', 'Calle 50', '1111', NULL, 'Hermosillo', 'Sonora', '', '14000', GETDATE()),
+    ('Gabriel', NULL, 'Sánchez', 'Luna', 'gabriel.sanchez@example.com', 'password951', '555-0115', 'Calle 55', '1212', '7G', 'Oaxaca', 'Oaxaca', '', '15000', GETDATE()),
+    ('Mariana', 'Fernández', 'Cruz', 'Bermúdez', 'mariana.fernandez@example.com', 'password753', '555-0116', 'Calle 60', '1313', NULL, 'Chihuahua', 'Chihuahua', '', '16000', GETDATE()),
+    ('Fernando', 'Javier', 'Jiménez', 'Salas', 'fernando.jimenez@example.com', 'password852', '555-0117', 'Calle 65', '1414', '8H', 'Durango', 'Durango', '', '17000', GETDATE()),
+    ('Verónica', 'Elena', 'Vera', 'Cordero', 'veronica.vera@example.com', 'password654', '555-0118', 'Calle 70', '1515', NULL, 'Aguascalientes', 'Aguascalientes', '', '18000', GETDATE()),
+    ('Hugo', NULL, 'Prado', 'Rosales', 'hugo.prado@example.com', 'password321', '555-0119', 'Calle 75', '1616', '9I', 'San Luis Potosí', 'San Luis Potosí', '', '19000', GETDATE()),
+    ('Patricia', 'Mónica', 'Ríos', 'Figueroa', 'patricia.rios@example.com', 'password987', '555-0120', 'Calle 80', '1717', NULL, 'Colima', 'Colima', '', '20000', GETDATE()),
+    ('Alberto', 'José', 'Ponce', 'Galeana', 'alberto.ponce@example.com', 'password654', '555-0121', 'Calle 85', '1818', '10J', 'Nayarit', 'Nayarit', '', '21000', GETDATE()),
+    ('Rosa', NULL, 'Cervantes', 'González', 'rosa.cervantes@example.com', 'password123', '555-0122', 'Calle 90', '1919', NULL, 'Zacatecas', 'Zacatecas', '', '22000', GETDATE()),
+    ('Ezequiel', 'Alejandro', 'Salinas', 'Moreno', 'ezequiel.salinas@example.com', 'password456', '555-0123', 'Calle 95', '2020', '11K', 'Tlaxcala', 'Tlaxcala', '', '23000', GETDATE()),
+    ('Luz', 'María', 'Ramos', 'Duarte', 'luz.ramos@example.com', 'password789', '555-0124', 'Calle 100', '2121', NULL, 'Morelos', 'Morelos', '', '24000', GETDATE())
+    ('Antonio', 'Miguel', 'Hernández', 'Pérez', 'antonio.hernandez@example.com', 'passwordABC', '555-0125', 'Calle 105', '2222', NULL, 'Tlaxcala', 'Tlaxcala', '', '25000', GETDATE()),
+    ('Elena', 'Patricia', 'Bautista', 'González', 'elena.bautista@example.com', 'passwordDEF', '555-0126', 'Calle 110', '2323', '1A', 'Veracruz', 'Veracruz', '', '26000', GETDATE()),
+    ('Roberto', NULL, 'Martínez', 'Salas', 'roberto.martinez@example.com', 'passwordGHI', '555-0127', 'Calle 115', '2424', NULL, 'Monterrey', 'Nuevo León', '', '27000', GETDATE()),
+    ('Julia', 'María', 'Mendoza', 'López', 'julia.mendoza@example.com', 'passwordJKL', '555-0128', 'Calle 120', '2525', '2B', 'Hermosillo', 'Sonora', '', '28000', GETDATE()),
+    ('Santiago', 'Eduardo', 'Ramírez', 'Torres', 'santiago.ramirez@example.com', 'passwordMNO', '555-0129', 'Calle 125', '2626', NULL, 'Puebla', 'Puebla', '', '29000', GETDATE()),
+    ('Carmen', 'Isabel', 'Salazar', 'Cruz', 'carmen.salazar@example.com', 'passwordPQR', '555-0130', 'Calle 130', '2727', '3C', 'Chihuahua', 'Chihuahua', '', '30000', GETDATE())
     </code></pre>
 
     <h3>Registro de Pedidos</h3>
     <pre><code>
     INSERT INTO Pedidos (ClienteID, FechaPedido, EstadoPedido, Total, FechaEntregaEstimada) VALUES
-    (1, GETDATE(), 'Pendiente', 99.99, DATEADD(DAY, 3, GETDATE())),
-    (2, GETDATE(), 'Entregado', 49.50, DATEADD(DAY, 2, GETDATE())),
-    (3, GETDATE(), 'En Proceso', 75.25, DATEADD(DAY, 5, GETDATE())),
-    (4, GETDATE(), 'Cancelado', 20.00, DATEADD(DAY, 1, GETDATE())),
-    (5, GETDATE(), 'Entregado', 150.75, DATEADD(DAY, 4, GETDATE())),
-    (6, GETDATE(), 'Pendiente', 200.00, DATEADD(DAY, 3, GETDATE())),
-    (7, GETDATE(), 'Entregado', 89.99, DATEADD(DAY, 2, GETDATE())),
-    (8, GETDATE(), 'En Proceso', 120.00, DATEADD(DAY, 5, GETDATE())),
-    (9, GETDATE(), 'Pendiente', 30.50, DATEADD(DAY, 3, GETDATE())),
-    (10, GETDATE(), 'Entregado', 47.75, DATEADD(DAY, 4, GETDATE())),
-    (11, GETDATE(), 'Pendiente', 65.00, DATEADD(DAY, 3, GETDATE())),
-    (12, GETDATE(), 'En Proceso', 80.25, DATEADD(DAY, 5, GETDATE())),
-    (13, GETDATE(), 'Cancelado', 10.00, DATEADD(DAY, 2, GETDATE())),
-    (14, GETDATE(), 'Entregado', 55.50, DATEADD(DAY, 4, GETDATE())),
-    (15, GETDATE(), 'Pendiente', 90.00, DATEADD(DAY, 3, GETDATE())),
-    (16, GETDATE(), 'Entregado', 120.00, DATEADD(DAY, 2, GETDATE())),
-    (17, GETDATE(), 'En Proceso', 60.00, DATEADD(DAY, 5, GETDATE())),
-    (18, GETDATE(), 'Pendiente', 100.50, DATEADD(DAY, 3, GETDATE())),
-    (19, GETDATE(), 'Cancelado', 25.00, DATEADD(DAY, 1, GETDATE())),
-    (20, GETDATE(), 'Entregado', 70.80, DATEADD(DAY, 4, GETDATE())),
-    (21, GETDATE(), 'Pendiente', 110.00, DATEADD(DAY, 3, GETDATE())),
-    (22, GETDATE(), 'Entregado', 95.00, DATEADD(DAY, 2, GETDATE())),
-    (23, GETDATE(), 'En Proceso', 85.00, DATEADD(DAY, 5, GETDATE())),
-    (24, GETDATE(), 'Pendiente', 45.25, DATEADD(DAY, 3, GETDATE())),
-    (25, GETDATE(), 'Entregado', 150.00, DATEADD(DAY, 4, GETDATE())),
-    (26, GETDATE(), 'Pendiente', 60.00, DATEADD(DAY, 3, GETDATE())),
-    (27, GETDATE(), 'En Proceso', 115.50, DATEADD(DAY, 5, GETDATE())),
-    (28, GETDATE(), 'Cancelado', 35.00, DATEADD(DAY, 2, GETDATE())),
-    (29, GETDATE(), 'Entregado', 75.25, DATEADD(DAY, 4, GETDATE())),
-    (30, GETDATE(), 'Pendiente', 80.00, DATEADD(DAY, 3, GETDATE()));
+    (1, GETDATE(), 'Pendiente', 120.50, DATEADD(DAY, 5, GETDATE())),
+    (1, GETDATE(), 'Entregado', 150.00, DATEADD(DAY, 3, GETDATE())),
+    (2, GETDATE(), 'Cancelado', 200.75, NULL),
+    (3, GETDATE(), 'En Proceso', 250.00, DATEADD(DAY, 7, GETDATE())),
+    (4, GETDATE(), 'Entregado', 175.50, DATEADD(DAY, 4, GETDATE())),
+    (5, GETDATE(), 'Pendiente', 300.00, DATEADD(DAY, 6, GETDATE())),
+    (6, GETDATE(), 'Pendiente', 110.99, DATEADD(DAY, 2, GETDATE())),
+    (7, GETDATE(), 'Entregado', 140.25, DATEADD(DAY, 1, GETDATE())),
+    (8, GETDATE(), 'En Proceso', 160.00, DATEADD(DAY, 8, GETDATE())),
+    (9, GETDATE(), 'Cancelado', 125.50, NULL),
+    (10, GETDATE(), 'Pendiente', 180.00, DATEADD(DAY, 9, GETDATE())),
+    (11, GETDATE(), 'Entregado', 220.00, DATEADD(DAY, 5, GETDATE())),
+    (12, GETDATE(), 'Pendiente', 145.00, DATEADD(DAY, 3, GETDATE())),
+    (13, GETDATE(), 'En Proceso', 175.75, DATEADD(DAY, 6, GETDATE())),
+    (14, GETDATE(), 'Cancelado', 130.00, NULL),
+    (15, GETDATE(), 'Pendiente', 190.50, DATEADD(DAY, 4, GETDATE())),
+    (16, GETDATE(), 'Entregado', 210.99, DATEADD(DAY, 2, GETDATE())),
+    (17, GETDATE(), 'Pendiente', 165.00, DATEADD(DAY, 7, GETDATE())),
+    (18, GETDATE(), 'En Proceso', 150.00, DATEADD(DAY, 3, GETDATE())),
+    (19, GETDATE(), 'Cancelado', 135.00, NULL),
+    (20, GETDATE(), 'Pendiente', 175.25, DATEADD(DAY, 1, GETDATE())),
+    (21, GETDATE(), 'Entregado', 250.00, DATEADD(DAY, 5, GETDATE())),
+    (22, GETDATE(), 'Pendiente', 145.50, DATEADD(DAY, 3, GETDATE())),
+    (23, GETDATE(), 'En Proceso', 200.99, DATEADD(DAY, 6, GETDATE())),
+    (24, GETDATE(), 'Cancelado', 130.50, NULL),
+    (25, GETDATE(), 'Pendiente', 155.75, DATEADD(DAY, 4, GETDATE())),
+    (26, GETDATE(), 'Entregado', 180.00, DATEADD(DAY, 2, GETDATE())),
+    (27, GETDATE(), 'Pendiente', 165.50, DATEADD(DAY, 1, GETDATE())),
+    (28, GETDATE(), 'En Proceso', 190.00, DATEADD(DAY, 5, GETDATE())),
+    (29, GETDATE(), 'Cancelado', 175.00, NULL),
+    (30, GETDATE(), 'Pendiente', 150.00, DATEADD(DAY, 3, GETDATE()))
     </code></pre>
 
     <h3>Registro de Comentarios</h3>
     <pre><code>
-    INSERT INTO Comentarios (ClienteID, Texto, FechaComentario) VALUES
-    (1, '¿Cuál es el estado de mi pedido?', GETDATE()),
-    (2, 'Me gustaría saber más sobre el producto.', GETDATE()),
-    (3, 'No he recibido información de envío.', GETDATE()),
-    (4, 'Quiero cancelar mi pedido.', GETDATE()),
-    (5, 'El producto llegó dañado.', GETDATE()),
-    (6, '¿Pueden darme un seguimiento de mi pedido?', GETDATE()),
-    (7, '¿Hay descuentos disponibles?', GETDATE()),
-    (8, 'Tengo un problema con el pago.', GETDATE()),
-    (9, '¿Cuál es la política de devoluciones?', GETDATE()),
-    (10, 'El servicio al cliente fue excelente.', GETDATE()),
-    (11, 'Me gustaría cambiar mi dirección de envío.', GETDATE()),
-    (12, 'El tiempo de entrega es muy largo.', GETDATE()),
-    (13, '¿Puedo recibir una factura digital?', GETDATE()),
-    (14, '¿Hay disponibilidad del producto en tienda?', GETDATE()),
-    (15, 'El sitio web tiene errores.', GETDATE()),
-    (16, '¿Puedo realizar un pedido por teléfono?', GETDATE()),
-    (17, '¿Qué métodos de pago aceptan?', GETDATE()),
-    (18, 'No estoy satisfecho con el producto.', GETDATE()),
-    (19, 'Me gustaría hacer una queja formal.', GETDATE()),
-    (20, '¿Cómo puedo contactar al soporte técnico?', GETDATE()),
-    (21, 'El producto que recibí no coincide con la descripción.', GETDATE()),
-    (22, '¿Tienen más tamaños disponibles?', GETDATE()),
-    (23, '¿Pueden ayudarme con un reembolso?', GETDATE()),
-    (24, '¿Cuál es el plazo para cambios?', GETDATE()),
-    (25, 'Me gustaría recibir una actualización de mi pedido.', GETDATE()),
-    (26, 'El producto no funciona correctamente.', GETDATE()),
-    (27, '¿Hay algún programa de lealtad?', GETDATE()),
-    (28, '¿Tienen chat en línea para soporte?', GETDATE()),
-    (29, '¿Cuál es el costo de envío?', GETDATE()),
-    (30, 'Quiero saber si tienen una tienda física.', GETDATE());
+    INSERT INTO Comentarios (ClienteID, Comentario, FechaComentario) VALUES
+    (1, 'Excelente servicio y rápido envío.', GETDATE()),
+    (1, 'El producto llegó en perfectas condiciones.', GETDATE()),
+    (2, 'No estoy satisfecho con la calidad.', GETDATE()),
+    (3, 'Muy buena atención al cliente.', GETDATE()),
+    (4, 'El pedido llegó tarde, pero bien empaquetado.', GETDATE()),
+    (5, 'Me encanta este producto, lo volveré a comprar.', GETDATE()),
+    (6, 'La página es fácil de usar, muy recomendable.', GETDATE()),
+    (7, 'Tuvieron una buena oferta, gracias.', GETDATE()),
+    (8, 'El producto no coincide con la descripción.', GETDATE()),
+    (9, 'El envío fue muy lento.', GETDATE()),
+    (10, 'Todo perfecto, gracias.', GETDATE()),
+    (11, 'Buen proceso de compra.', GETDATE()),
+    (12, 'El servicio al cliente es excelente.', GETDATE()),
+    (13, 'No me llegó la confirmación del pedido.', GETDATE()),
+    (14, 'Gran variedad de productos.', GETDATE()),
+    (15, 'Me gustaría más opciones de pago.', GETDATE()),
+    (16, 'El sitio web se cayó durante mi compra.', GETDATE()),
+    (17, 'El seguimiento del pedido es muy útil.', GETDATE()),
+    (18, 'Recomiendo esta tienda.', GETDATE()),
+    (19, 'El producto llegó con un defecto.', GETDATE()),
+    (20, 'La atención telefónica es muy buena.', GETDATE()),
+    (21, 'Me gustaría ver más reseñas de productos.', GETDATE()),
+    (22, 'El chat en vivo es muy útil.', GETDATE()),
+    (23, 'Los precios son muy competitivos.', GETDATE()),
+    (24, 'El proceso de devolución es complicado.', GETDATE()),
+    (25, 'Recibí el producto equivocado.', GETDATE()),
+    (26, 'La calidad del empaque puede mejorar.', GETDATE()),
+    (27, 'Todo fue muy rápido y fácil.', GETDATE()),
+    (28, 'Me gustaría que tuviesen más tallas.', GETDATE()),
+    (29, 'El servicio es muy amigable.', GETDATE()),
+    (30, 'No tengo quejas, todo bien.', GETDATE())
     </code></pre>
 
     <h3>Registro de Respuestas</h3>
     <pre><code>
-    INSERT INTO Respuestas (ComentarioID, TextoRespuesta, FechaRespuesta) VALUES
-    (1, 'Su pedido está en camino y se entregará pronto.', GETDATE()),
-    (2, 'Puede consultar el sitio para más información sobre el producto.', GETDATE()),
-    (3, 'Estamos investigando la demora en su envío.', GETDATE()),
-    (4, 'Su pedido ha sido cancelado con éxito.', GETDATE()),
-    (5, 'Lamentamos el inconveniente. Por favor, contáctenos para resolverlo.', GETDATE()),
-    (6, 'Su pedido será enviado en las próximas 24 horas.', GETDATE()),
-    (7, 'Sí, actualmente ofrecemos descuentos. Consulte nuestra página de ofertas.', GETDATE()),
-    (8, 'Por favor, intente nuevamente con otro método de pago.', GETDATE()),
-    (9, 'Nuestra política de devoluciones está disponible en el sitio web.', GETDATE()),
-    (10, 'Agradecemos su comentario. Estamos aquí para ayudar.', GETDATE()),
-    (11, 'Por favor, envíenos los detalles de su nueva dirección.', GETDATE()),
-    (12, 'Lamentamos la espera. Estamos trabajando para mejorar nuestros tiempos de entrega.', GETDATE()),
-    (13, 'Sí, puede solicitar su factura digital a través de nuestro correo de soporte.', GETDATE()),
-    (14, 'Por favor, visite nuestra tienda en la dirección indicada en el sitio web.', GETDATE()),
-    (15, 'Estamos trabajando para corregir los errores en el sitio.', GETDATE()),
-    (16, 'Sí, puede realizar pedidos por teléfono. Llame al número proporcionado.', GETDATE()),
-    (17, 'Aceptamos varios métodos de pago, incluidos tarjetas de crédito y PayPal.', GETDATE()),
-    (18, 'Lamentamos que no esté satisfecho. Por favor, contáctenos para asistencia.', GETDATE()),
-    (19, 'Por favor, envíenos los detalles de su queja a nuestro correo de soporte.', GETDATE()),
-    (20, 'Puede contactar al soporte técnico a través del chat en línea.', GETDATE()),
-    (21, 'Lamentamos la confusión. Por favor, contáctenos para resolverlo.', GETDATE()),
-    (22, 'Podemos verificar la disponibilidad de otros tamaños. Por favor, especifique.', GETDATE()),
-    (23, 'Estamos procesando su solicitud de reembolso. Recibirá una actualización pronto.', GETDATE()),
-    (24, 'El plazo para cambios es de 30 días desde la recepción del producto.', GETDATE()),
-    (25, 'Su pedido será actualizado con la nueva información.', GETDATE()),
-    (26, 'Por favor, devuélvanos el producto para poder ayudarle.', GETDATE()),
-    (27, 'Sí, ofrecemos un programa de lealtad. Consulte nuestra página para más detalles.', GETDATE()),
-    (28, 'Sí, tenemos chat en línea disponible en horario laboral.', GETDATE()),
-    (29, 'El costo de envío varía según la ubicación. Puede calcularlo en el carrito.', GETDATE()),
-    (30, 'No tenemos tienda física, pero puede realizar pedidos en línea.', GETDATE());
+    INSERT INTO Respuestas (Respuesta, FechaRespuesta) VALUES
+    ('Gracias por tu comentario. Nos alegra saber que estás satisfecho.', GETDATE()),
+    ('Lamentamos que no estés satisfecho. Por favor, contáctanos para solucionar el problema.', GETDATE()),
+    ('Agradecemos tu feedback. Siempre estamos mejorando.', GETDATE()),
+    ('Lamentamos la tardanza. Estamos trabajando en mejorar nuestros tiempos de entrega.', GETDATE()),
+    ('¡Nos alegra que te guste! Gracias por tu compra.', GETDATE()),
+    ('Gracias por tu recomendación. Esperamos verte de nuevo.', GETDATE()),
+    ('Nos alegra saber que encontraste una buena oferta.', GETDATE()),
+    ('Tomaremos en cuenta tu comentario sobre la descripción del producto.', GETDATE()),
+    ('Agradecemos tu paciencia. Trabajamos para mejorar nuestros tiempos de envío.', GETDATE()),
+    ('Estamos felices de saber que estás satisfecho con tu compra.', GETDATE()),
+    ('Gracias por compartir tu experiencia. Tu opinión es importante para nosotros.', GETDATE()),
+    ('Nos alegra saber que el proceso de compra fue fácil para ti.', GETDATE()),
+    ('Gracias por tu comentario. Siempre estamos aquí para ayudarte.', GETDATE()),
+    ('Lamentamos que no hayas recibido la confirmación. Verificaremos el problema.', GETDATE()),
+    ('Agradecemos tu sugerencia sobre las opciones de pago. Lo consideraremos.', GETDATE()),
+    ('Lamentamos los inconvenientes con el sitio web. Estamos trabajando para mejorar.', GETDATE()),
+    ('Gracias por tus elogios. Nuestro equipo trabaja arduamente para ofrecer el mejor servicio.', GETDATE()),
+    ('Agradecemos tu recomendación. Esperamos seguir contando contigo.', GETDATE()),
+    ('Lamentamos el defecto en tu producto. Por favor, contáctanos para resolverlo.', GETDATE()),
+    ('Gracias por tu comentario positivo. Nos motiva a seguir mejorando.', GETDATE()),
+    ('Agradecemos tu sugerencia sobre las reseñas de productos. Trabajaremos en ello.', GETDATE()),
+    ('Gracias por utilizar nuestro chat en vivo. Estamos aquí para ayudarte.', GETDATE()),
+    ('Agradecemos tu comentario sobre nuestros precios. Siempre buscamos ser competitivos.', GETDATE()),
+    ('Lamentamos los inconvenientes con el proceso de devolución. Estamos mejorando.', GETDATE()),
+    ('Lamentamos que hayas recibido el producto equivocado. Por favor, contáctanos.', GETDATE()),
+    ('Agradecemos tu opinión sobre el empaque. La tomaremos en cuenta.', GETDATE()),
+    ('Nos alegra saber que todo fue rápido y fácil. Gracias por tu confianza.', GETDATE()),
+    ('Gracias por tu comentario sobre las tallas. Lo consideraremos en nuestro inventario.', GETDATE()),
+    ('Agradecemos tu elogio sobre nuestro servicio. Estamos aquí para servirte.', GETDATE()),
+    ('Gracias por tus comentarios. Nos motiva a seguir mejorando.', GETDATE()),
+    ('Lamentamos los inconvenientes. Estamos aquí para ayudarte.', GETDATE())
     </code></pre>
 
+    <h3>Registro de ComentarioRespuesta</h3>
+    <pre><code>
+    INSERT INTO ComentarioRespuesta (ComentarioID, RespuestaID) VALUES
+    (1, 1),
+    (2, 2),
+    (3, 3),
+    (4, 4),
+    (5, 5),
+    (6, 6),
+    (7, 7),
+    (8, 8),
+    (9, 9),
+    (10, 10),
+    (11, 11),
+    (12, 12),
+    (13, 13),
+    (14, 14),
+    (15, 15),
+    (16, 16),
+    (17, 17),
+    (18, 18),
+    (19, 19),
+    (20, 20),
+    (21, 21),
+    (22, 22),
+    (23, 23),
+    (24, 24),
+    (25, 25),
+    (26, 26),
+    (27, 27),
+    (28, 28),
+    (29, 29),
+    (30, 30)
+    </code></pre>
 
 
 
