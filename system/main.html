@@ -7,7 +7,100 @@
 </head>
 <body>
     
-    <h1></h1>
+    
+    <h1>Crear Cliente</h1>
+
+
+<div class="row">
+    <div class="col-sm-4">
+        <form id="clienteForm" asp-action="DetalleCliente" asp-controller="Home" method="post">
+            <input type="hidden" asp-for="oCliente.ClienteId" />
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="oCliente.PrimerNombre">Primer Nombre</label>
+                <input class="form-control" asp-for="oCliente.PrimerNombre" type="text" required />
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="oCliente.SegundoNombre">Segundo Nombre</label>
+                <input class="form-control" asp-for="oCliente.SegundoNombre" type="text" />
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="oCliente.ApellidoPaterno">Apellido Paterno</label>
+                <input class="form-control" asp-for="oCliente.ApellidoPaterno" type="text" required />
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="oCliente.ApellidoMaterno">Apellido Materno</label>
+                <input class="form-control" asp-for="oCliente.ApellidoMaterno" type="text" required />
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="oCliente.CorreoElectronico">Correo Electrónico</label>
+                <input class="form-control" asp-for="oCliente.CorreoElectronico" type="email" required />
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="oCliente.Contraseña">Contraseña</label>
+                <input id="passwordInput" class="form-control" asp-for="oCliente.Contraseña" type="password" required />
+                <input type="checkbox" id="togglePassword" onclick="togglePasswordVisibility()">
+                <label for="togglePassword">Mostrar contraseña</label>
+            </div>
+
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="oCliente.Telefono">Teléfono</label>
+                <input class="form-control" asp-for="oCliente.Telefono" type="text" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="oCliente.Calle">Calle</label>
+                <input class="form-control" asp-for="oCliente.Calle" type="text" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="oCliente.NumeroExterior">Número Exterior</label>
+                <input class="form-control" asp-for="oCliente.NumeroExterior" type="text" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="oCliente.NumeroInterior">Número Interior</label>
+                <input class="form-control" asp-for="oCliente.NumeroInterior" type="text" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="oCliente.Colonia">Colonia</label>
+                <input class="form-control" asp-for="oCliente.Colonia" type="text" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="oCliente.Municipio">Municipio</label>
+                <input class="form-control" asp-for="oCliente.Municipio" type="text" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="oCliente.Referencias">Referencias de domicilio</label>
+                <input class="form-control" asp-for="oCliente.Referencias" type="text" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="oCliente.CodigoPostal">Código Postal</label>
+                <input class="form-control" asp-for="oCliente.CodigoPostal" type="text" required />
+            </div>
+
+            <div class="mb-3">
+                
+                    <button class="btn btn-primary btn-sm w-25" type="submit">Crear</button>
+                
+                    <button class="btn btn-primary btn-sm w-25" type="submit">Actualizar</button>
+                    <button class="btn btn-dark" asp-action="Index" asp-controller="Home" type="submit">Volver</button>
+                
+            </div>
+        </form>
+    </div>
+</div>
+
 
 </body>
 </html>
